@@ -1,4 +1,5 @@
 import CustomButton from './components/CustomButton';
+import CustomCard from './components/CustomCard';
 import SearchBar from './components/SearchBar';
 import Title from './components/Title';
 
@@ -14,7 +15,13 @@ function App() {
           </div>
         </section>
       </header>
-      <main>tes</main>
+      <main className="grid grid-cols-5 gap-5 w-full h-full p-5">
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+      </main>
     </>
   );
 }
