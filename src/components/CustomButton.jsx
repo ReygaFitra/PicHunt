@@ -1,8 +1,8 @@
 const CustomButton = (props) => {
-  const { text = '...' } = props;
+  const { text = '...', ButtonStyles } = props;
   return (
     <div>
-      <button className="bg-secondary text-white py-1 px-2 my-3 rounded hover:bg-primary transition-all duration-200">{text}</button>
+      <button className={ButtonStyles}>{text}</button>
     </div>
   );
 };

@@ -1,8 +1,9 @@
-const Title = () => {
+const Title = (props) => {
+  const { TitleBodyStyles, TitleStyles, TitleDescriptionStyles, title, description } = props;
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-5xl text-primary font-semibold">PicHunt</h1>
-      <p className="text-lg text-secondary">Your Free Images & Pictures</p>
+    <div className={TitleBodyStyles}>
+      <h1 className={TitleStyles}>{title}</h1>
+      <p className={TitleDescriptionStyles}>{description}</p>
     </div>
   );
 };
