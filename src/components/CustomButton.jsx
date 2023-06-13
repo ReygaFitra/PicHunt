@@ -1,8 +1,14 @@
 const CustomButton = (props) => {
-  const { text = '...', ButtonStyles } = props;
+  const { text = '...', ButtonStyles, handleButtonSelection, selection } = props;
+  const handleClick = () => {
+    handleButtonSelection(selection);
+  };
+
   return (
     <div>
-      <button className={ButtonStyles}>{text}</button>
+      <button className={ButtonStyles} onClick={handleClick}>
+        {text}
+      </button>
     </div>
   );
 };
