@@ -3,9 +3,9 @@ import axios from 'axios';
 const API_URL = 'https://api.pexels.com/v1/';
 const IMAGE_PER_PAGE = 80;
 
-export const FetchImageSearch = async (query) => {
+export const FetchImageSearch = async (query, pages) => {
   try {
-    const response = await axios.get(`${API_URL}search?query=${query}&per_page=${IMAGE_PER_PAGE}&page=1`, {
+    const response = await axios.get(`${API_URL}search?query=${query}&per_page=${IMAGE_PER_PAGE}&page=${pages}`, {
       headers: {
         Authorization: import.meta.env.VITE_API_KEY,
       },
@@ -18,9 +18,9 @@ export const FetchImageSearch = async (query) => {
   }
 };
 
-export const FetchImageRandom = async () => {
+export const FetchImageRandom = async (pages) => {
   try {
-    const response = await axios.get(`${API_URL}curated?per_page=${IMAGE_PER_PAGE}&page=1`, {
+    const response = await axios.get(`${API_URL}curated?per_page=${IMAGE_PER_PAGE}&page=${pages}`, {
       headers: {
         Authorization: import.meta.env.VITE_API_KEY,
       },

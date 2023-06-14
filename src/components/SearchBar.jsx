@@ -5,22 +5,23 @@ import { FetchImageSearch } from '../Api/ApiData';
 
 const SearchBar = (props) => {
   const { name, type, placeholder, SearchContainerStyles, SearchFormStyles, SearchInputStyles } = props;
-  const { searchInput, setSearchInput, setImages } = useAppStore();
+  const { searchInput, setSearchInput, setImages, searchPages, setSearchPages } = useAppStore();
 
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
-      const imageResponse = await FetchImageSearch(searchInput);
+      const imageResponse = await FetchImageSearch(searchInput, searchPages);
       setImages(imageResponse);
+      setSearchPages(1);
     } catch (error) {
       console.error('Error fetching images:', error);
     }
-    setSearchInput('');
   };
   const handleButtonSelection = async (selection) => {
     try {
-      const imageResponse = await FetchImageSearch(selection);
+      const imageResponse = await FetchImageSearch(selection, searchPages);
       setImages(imageResponse);
+      setSearchPages(1);
     } catch (error) {
       console.error('Error fetching images:', error);
     }
