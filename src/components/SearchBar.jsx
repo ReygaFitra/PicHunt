@@ -29,7 +29,7 @@ const SearchBar = (props) => {
   };
 
   const styles = {
-    CategoryButton: `flex flex-rows gap-2`,
+    CategoryButton: `flex justify-center flex-wrap flex-rows gap-2`,
     Button: `bg-secondary text-white py-1 px-2 my-3 rounded hover:bg-primary transition-all duration-200`,
   };
 
