@@ -1,8 +1,27 @@
+import { useEffect } from 'react';
 import CustomCard from './components/CustomCard';
 import SearchBar from './components/SearchBar';
 import Title from './components/Title';
+import { useAppStore } from './stores/AppStore';
+import { FetchImageRandom } from './Api/ApiData';
 
 function App() {
+  const { images, setImages } = useAppStore();
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const imageResponse = await FetchImageRandom();
+
+        setImages(imageResponse);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
   const styles = {
     header: `w-full h-96 flex justify-center items-center`,
     container: `grid grid-cols-5 gap-5 w-full h-full p-5`,
@@ -25,36 +44,9 @@ function App() {
         </section>
       </header>
       <main className={styles.container}>
-        <CustomCard
-          src="https://images.unsplash.com/photo-1685438531044-ef75606db89d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-          alt="example"
-          CardBodyStyles={styles.CardBody}
-          CardBodyImageStyles={styles.CardImage}
-        />
-        <CustomCard
-          src="https://images.unsplash.com/photo-1685438531044-ef75606db89d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-          alt="example"
-          CardBodyStyles={styles.CardBody}
-          CardBodyImageStyles={styles.CardImage}
-        />
-        <CustomCard
-          src="https://images.unsplash.com/photo-1685438531044-ef75606db89d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-          alt="example"
-          CardBodyStyles={styles.CardBody}
-          CardBodyImageStyles={styles.CardImage}
-        />
-        <CustomCard
-          src="https://images.unsplash.com/photo-1685438531044-ef75606db89d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-          alt="example"
-          CardBodyStyles={styles.CardBody}
-          CardBodyImageStyles={styles.CardImage}
-        />
-        <CustomCard
-          src="https://images.unsplash.com/photo-1685438531044-ef75606db89d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
-          alt="example"
-          CardBodyStyles={styles.CardBody}
-          CardBodyImageStyles={styles.CardImage}
-        />
+        {images.map((image) => (
+          <CustomCard key={image.id} src={image.src.medium} alt={image.alt} CardBodyStyles={styles.CardBody} CardBodyImageStyles={styles.CardImage} />
+        ))}
       </main>
     </>
   );

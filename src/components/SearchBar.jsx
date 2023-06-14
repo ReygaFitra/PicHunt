@@ -1,16 +1,29 @@
 import * as Form from '@radix-ui/react-form';
 import CustomButton from './CustomButton';
 import { useAppStore } from '../stores/AppStore';
+import { FetchImageSearch } from '../Api/ApiData';
 
 const SearchBar = (props) => {
   const { name, type, placeholder, SearchContainerStyles, SearchFormStyles, SearchInputStyles } = props;
-  const { searchInput, setSearchInput } = useAppStore();
+  const { searchInput, setSearchInput, setImages } = useAppStore();
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
+    try {
+      const imageResponse = await FetchImageSearch(searchInput);
+      setImages(imageResponse);
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    }
     setSearchInput('');
   };
-  const handleButtonSelection = (selection) => {
+  const handleButtonSelection = async (selection) => {
+    try {
+      const imageResponse = await FetchImageSearch(selection);
+      setImages(imageResponse);
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    }
     setSearchInput(selection);
   };
 
