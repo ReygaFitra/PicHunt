@@ -1,11 +1,82 @@
+import * as Dialog from '@radix-ui/react-dialog';
+import { FaCamera } from 'react-icons/fa';
+import { MdOutlineNumbers } from 'react-icons/Md';
+import { AiOutlineDownload } from 'react-icons/Ai';
+import { BsPersonCircle } from 'react-icons/Bs';
+import { SiPexels } from 'react-icons/Si';
+import { Link } from 'react-router-dom';
+import * as Separator from '@radix-ui/react-separator';
+
 const CustomCard = (props) => {
-  const { src, alt, CardBodyStyles, CardBodyImageStyles } = props;
+  const { src, srcDetail, alt, CardBodyStyles, CardBodyImageStyles, CardDetailImageStyles, photographer, photoID, photographerURL, officialURL } = props;
+
+  const handleDownload = () => {
+    fetch(srcDetail)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = srcDetail;
+        link.target = '_blank';
+        link.click();
+        URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error('Error downloading image:', error);
+      });
+  };
   return (
-    <div>
-      <div className={CardBodyStyles}>
+    <Dialog.Root>
+      <Dialog.Trigger asChild className={CardBodyStyles}>
         <img className={CardBodyImageStyles} src={src} alt={alt} />
-      </div>
-    </div>
+      </Dialog.Trigger>
+      <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-10" />
+      <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5 rounded-lg shadow-lg z-20 w-[360px] h-[600px] md:w-[600px] md:h-[600px]">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-full h-96">
+            <img className={CardDetailImageStyles} src={srcDetail} alt={alt} />
+          </div>
+          <div className="flex gap-9">
+            <div>
+              <Dialog.Description className="text-primary text-md md:text-lg flex items-center gap-1 drop-shadow-sm">
+                <FaCamera />
+                Photographer:
+                <p className="text-emerald-400 hover:text-emerald-500 drop-shadow-sm">{photographer}</p>
+              </Dialog.Description>
+              <Dialog.Description className="text-primary text-md md:text-lg flex items-center gap-1 drop-shadow-sm">
+                <MdOutlineNumbers />
+                Photo ID:
+                <Link to={officialURL} target="blank" className="text-primary underline">
+                  <p className="text-emerald-400 hover:text-emerald-500 drop-shadow-sm">{photoID}</p>
+                </Link>
+              </Dialog.Description>
+            </div>
+
+            <button className="outline-none text-xl md:text-2xl bg-secondary rounded hover:bg-primary text-white py-1 px-2 md:py-2 md:px-4 transition-colors duration-200" onClick={handleDownload}>
+              <AiOutlineDownload />
+            </button>
+          </div>
+          <Separator.Root className="bg-base data-[orientation=horizontal]:h-[1px] data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px my-[15px]" />
+        </div>
+        <div className="flex justify-between md:justify-evenly">
+          <div>
+            <p className="text-sm mt-3 font-semibold text-primary">Visit Official Site:</p>
+            <Link to="https://www.pexels.com/" target="blank" className="flex items-center gap-2 hover:text-emerald-600 transition-all duration-200">
+              <SiPexels className="text-4xl md:text-5xl" />
+              <p className="text-lg md:text-2xl font-semibold">Pexels</p>
+            </Link>
+          </div>
+          <div>
+            <p className="text-sm mt-3 font-semibold text-primary">Visit Photographer:</p>
+            <Link to={photographerURL} target="blank" className="flex items-center gap-2 hover:text-emerald-600 transition-all duration-200">
+              <BsPersonCircle className="text-4xl md:text-5xl" />
+              <p className="text-lg md:text-2xl font-semibold">{photographer}</p>
+            </Link>
+          </div>
+        </div>
+      </Dialog.Content>
+    </Dialog.Root>
   );
 };
 

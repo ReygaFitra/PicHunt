@@ -5,6 +5,7 @@ import Title from './components/Title';
 import { useAppStore } from './stores/AppStore';
 import { FetchImageRandom, FetchImageSearch } from './Api/ApiData';
 import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill, BsFillArrowUpCircleFill } from 'react-icons/Bs';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   const { images, setImages, pages, setPages, searchInput, searchPages, setSearchPages } = useAppStore();
@@ -50,18 +51,19 @@ function App() {
   const styles = {
     header: `w-full h-96 flex justify-center items-center`,
     container: `grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-7 md:gap-5 w-full h-full p-5`,
-    TitleBody: `flex flex-col justify-center items-center`,
+    TitleBody: `flex flex-col justify-center items-center cursor-default`,
     Title: `text-5xl text-primary font-semibold`,
     TitleDescription: `text-lg text-secondary`,
     SearchbarContainer: `w-full h-full flex justify-center items-center`,
     SearchbarFormRoot: `text-center w-[350px] md:w-[575px]`,
     SearchbarInput: `mt-12 border-2 border-base focus:border-primary bg-light outline-none w-full h-9 rounded-md transition-all duration-200 px-3`,
     CardBody: `bg-base w-full h-[400px] md:w-[250px] md:h-[250px] rounded-xl overflow-hidden hover:scale-105 transition-all duration-200`,
-    CardImage: `w-full h-full rounded-xl object-fit transition-transform duration-300 transform hover:scale-110 cursor-pointer`,
+    CardImage: `w-full h-full rounded-xl object-fit transition-transform duration-300 transform hover:scale-105 md:hover:scale-110 cursor-pointer`,
+    CardDetail: `w-full h-full rounded-xl object-content transition-transform duration-300 transform cursor-pointer`,
   };
 
   return (
-    <>
+    <BrowserRouter>
       <header className={styles.header} id="header">
         <section>
           <Title title="PicHunt" description="Your Free Images & Pictures" TitleBodyStyles={styles.TitleBody} TitleStyles={styles.Title} TitleDescriptionStyles={styles.TitleDescription} />
@@ -70,20 +72,26 @@ function App() {
       </header>
       <main className={styles.container}>
         {images.map((image) => (
-          <CustomCard key={image.id} src={image.src.medium} alt={image.alt} CardBodyStyles={styles.CardBody} CardBodyImageStyles={styles.CardImage} />
+          <CustomCard
+            key={image.id}
+            src={image.src.large2x}
+            srcDetail={image.src.original}
+            alt={image.alt}
+            CardBodyStyles={styles.CardBody}
+            CardBodyImageStyles={styles.CardImage}
+            CardDetailImageStyles={styles.CardDetail}
+            photographer={image.photographer}
+            photoID={image.id}
+            photographerURL={image.photographer_url}
+            officialURL={image.url}
+          />
         ))}
       </main>
       <div className="flex justify-center gap-2 fixed bottom-7 right-0 left-0">
-        {searchInput !== '' && searchPages > 1 && (
-          <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handlePreviousPage}>
-            <BsFillArrowLeftCircleFill className="text-black text-2xl" />
-          </button>
-        )}
-        {pages > 1 && (
-          <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handlePreviousPage}>
-            <BsFillArrowLeftCircleFill className="text-black text-2xl" />
-          </button>
-        )}
+        <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handlePreviousPage}>
+          <BsFillArrowLeftCircleFill className="text-black text-2xl" />
+        </button>
+
         <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handleNextPage}>
           <BsFillArrowRightCircleFill className="text-black text-2xl" />
         </button>
@@ -93,7 +101,7 @@ function App() {
           <BsFillArrowUpCircleFill className="text-white text-3xl md:text-5xl lg:text-4xl" />
         </a>
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 
