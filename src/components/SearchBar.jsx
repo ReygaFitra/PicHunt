@@ -70,7 +70,7 @@ const SearchBar = (props) => {
         <Form.Root className={SearchFormStyles} onSubmit={handleSearch}>
           <Form.Field name={name}>
             <Form.Control asChild>
-              <input className={SearchInputStyles} name={name} type={type} value={searchInput || ''} onChange={(e) => setSearchInput(e.target.value)} placeholder={placeholder} />
+              <input className={SearchInputStyles} name={name} type={type} value={searchInput || ''} onChange={(e) => setSearchInput(e.target.value)} placeholder={placeholder} required />
             </Form.Control>
           </Form.Field>
         </Form.Root>

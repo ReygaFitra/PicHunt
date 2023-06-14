@@ -70,6 +70,7 @@ function App() {
           <SearchBar SearchContainerStyles={styles.SearchbarContainer} SearchFormStyles={styles.SearchbarFormRoot} SearchInputStyles={styles.SearchbarInput} name="search" type="search" placeholder="Search Your Images & Pictures..." />
         </section>
       </header>
+
       <main className={styles.container}>
         {images.map((image) => (
           <CustomCard
@@ -87,6 +88,7 @@ function App() {
           />
         ))}
       </main>
+
       <div className="flex justify-center gap-2 fixed bottom-7 right-0 left-0">
         <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handlePreviousPage}>
           <BsFillArrowLeftCircleFill className="text-black text-2xl" />
