@@ -4,8 +4,8 @@ import SearchBar from './components/SearchBar';
 import Title from './components/Title';
 import { useAppStore } from './stores/AppStore';
 import { FetchImageRandom, FetchImageSearch } from './Api/ApiData';
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill, BsFillArrowUpCircleFill } from 'react-icons/Bs';
 import { BrowserRouter } from 'react-router-dom';
+import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill, BsFillArrowUpCircleFill } from 'react-icons/Bs';
 
 function App() {
   const { images, setImages, pages, setPages, searchInput, searchPages, setSearchPages } = useAppStore();
