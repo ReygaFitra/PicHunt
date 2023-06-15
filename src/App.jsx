@@ -5,7 +5,9 @@ import Title from './components/Title';
 import { useAppStore } from './stores/AppStore';
 import { FetchImageRandom, FetchImageSearch } from './Api/ApiData';
 import { BrowserRouter } from 'react-router-dom';
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill, BsFillArrowUpCircleFill } from 'react-icons/Bs';
+import RightArrow from './components/svg/RightArrow';
+import LeftArrow from './components/svg/LeftArrow';
+import UpArrow from './components/svg/UpArrow';
 
 function App() {
   const { images, setImages, pages, setPages, searchInput, searchPages, setSearchPages } = useAppStore();
@@ -91,16 +93,16 @@ function App() {
 
       <div className="flex justify-center gap-2 fixed bottom-7 right-0 left-0">
         <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handlePreviousPage}>
-          <BsFillArrowLeftCircleFill className="text-black text-2xl" />
+          <LeftArrow width={25} height={25} />
         </button>
 
         <button className="py-3 px-3 my-3 rounded-full bg-primary bg-opacity-50 hover:bg-opacity-80 transition-all duration-200 " onClick={handleNextPage}>
-          <BsFillArrowRightCircleFill className="text-black text-2xl" />
+          <RightArrow width={25} height={25} />
         </button>
       </div>
       <div>
         <a href="#header" className="fixed bg-primary bg-opacity-50 hover:bg-opacity-80 bottom-10 right-4 md:right-10 lg:right-20 py-3 px-3 rounded-full transition-all duration-200">
-          <BsFillArrowUpCircleFill className="text-white text-3xl md:text-5xl lg:text-4xl" />
+          <UpArrow width={25} height={25} />
         </a>
       </div>
     </BrowserRouter>

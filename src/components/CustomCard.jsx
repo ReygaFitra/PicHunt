@@ -1,11 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { FaCamera } from 'react-icons/fa';
-import { MdOutlineNumbers } from 'react-icons/Md';
-import { AiOutlineDownload } from 'react-icons/Ai';
-import { BsPersonCircle } from 'react-icons/Bs';
-import { SiPexels } from 'react-icons/Si';
 import { Link } from 'react-router-dom';
 import * as Separator from '@radix-ui/react-separator';
+import DownloadSVG from './svg/Download';
+import Camera from './svg/Camera';
+import ImageID from './svg/ImageID';
+import Person from './svg/Person';
+import Pexels from './svg/Pexels';
 
 const CustomCard = (props) => {
   const { src, srcDetail, alt, CardBodyStyles, CardBodyImageStyles, CardDetailImageStyles, photographer, photoID, photographerURL, officialURL } = props;
@@ -40,21 +40,25 @@ const CustomCard = (props) => {
           <div className="flex gap-9">
             <div>
               <Dialog.Description className="text-primary text-md md:text-lg flex items-center gap-1 drop-shadow-sm">
-                <FaCamera />
-                Photographer:
-                <p className="text-emerald-400 hover:text-emerald-500 drop-shadow-sm">{photographer}</p>
+                <div className="flex items-center gap-1">
+                  <Camera width={25} height={25} />
+                  Photographer:
+                  <p className="text-emerald-400 hover:text-emerald-500 drop-shadow-sm">{photographer}</p>
+                </div>
               </Dialog.Description>
               <Dialog.Description className="text-primary text-md md:text-lg flex items-center gap-1 drop-shadow-sm">
-                <MdOutlineNumbers />
-                Photo ID:
-                <Link to={officialURL} target="blank" className="text-primary underline">
-                  <p className="text-emerald-400 hover:text-emerald-500 drop-shadow-sm">{photoID}</p>
-                </Link>
+                <div className="flex items-center gap-1">
+                  <ImageID width={25} height={25} />
+                  Photo ID:
+                  <Link to={officialURL} target="blank" className="text-primary underline">
+                    <p className="text-emerald-400 hover:text-emerald-500 drop-shadow-sm">{photoID}</p>
+                  </Link>
+                </div>
               </Dialog.Description>
             </div>
 
             <button className="outline-none text-xl md:text-2xl bg-secondary rounded hover:bg-primary text-white py-1 px-2 md:py-2 md:px-4 transition-colors duration-200" onClick={handleDownload}>
-              <AiOutlineDownload />
+              <DownloadSVG width={25} height={25} />
             </button>
           </div>
           <Separator.Root className="bg-base data-[orientation=horizontal]:h-[1px] data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px my-[15px]" />
@@ -62,15 +66,15 @@ const CustomCard = (props) => {
         <div className="flex justify-between md:justify-evenly">
           <div>
             <p className="text-sm mt-3 font-semibold text-primary">Visit Official Site:</p>
-            <Link to="https://www.pexels.com/" target="blank" className="flex items-center gap-2 hover:text-emerald-600 transition-all duration-200">
-              <SiPexels className="text-4xl md:text-5xl" />
+            <Link to="https://www.pexels.com/" target="blank" className="flex items-center hover:text-emerald-600 transition-all duration-200">
+              <Pexels width={30} height={30} />
               <p className="text-lg md:text-2xl font-semibold">Pexels</p>
             </Link>
           </div>
           <div>
             <p className="text-sm mt-3 font-semibold text-primary">Visit Photographer:</p>
             <Link to={photographerURL} target="blank" className="flex items-center gap-2 hover:text-emerald-600 transition-all duration-200">
-              <BsPersonCircle className="text-4xl md:text-5xl" />
+              <Person width={25} height={25} />
               <p className="text-lg md:text-2xl font-semibold">{photographer}</p>
             </Link>
           </div>
