@@ -18,7 +18,7 @@ This project built with Tech Stack bellow:
 
 1. ReactJS + ViteJS
 2. React Router Dom
-3. React Icons
+3. Radix Icons
 4. TailwindCSS + RadixUI
 5. PexelsAPI
 6. Zustand
